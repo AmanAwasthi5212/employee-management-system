@@ -1,6 +1,7 @@
 package com.first.Service;
 
 //import com.first.Model.DummyEmployeeData;
+import com.first.DTO.updateEmployeeDTO;
 import com.first.Model.Employee;
 import com.first.Repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class EmployeeService {
         } else return "User does not exist";
     }
 
-    public String updateEmployee(Employee emp, long id){
+    public String updateEmployee(updateEmployeeDTO emp, long id){
         return empRepository.findById(id).map(existingEmp -> {
             if(emp.getFirstName() != null) existingEmp.setFirstName(emp.getFirstName());
             if(emp.getLastName() != null) existingEmp.setLastName(emp.getLastName());

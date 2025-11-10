@@ -1,8 +1,11 @@
 package com.first.Controller;
 
+import com.first.DTO.updateEmployeeDTO;
 import com.first.Model.Employee;
 import com.first.Service.EmployeeService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,7 +23,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/addUser")
-    public String addEmployee(@RequestBody Employee employee){
+    public String addEmployee(@Valid @RequestBody Employee employee){
         return employeeService.addEmployee(employee);
     }
 
@@ -30,8 +33,9 @@ public class EmployeeController {
     }
 
     @PutMapping("/updateUser/{id}")
-    public String updateEmployee(@RequestBody Employee employee, @PathVariable long id){
-        return employeeService.updateEmployee(employee, id);
+    public ResponseEntity<String> updateEmployee( @RequestBody updateEmployeeDTO employee, @PathVariable long id){
+        String result = employeeService.updateEmployee(employee, id);
+        return ResponseEntity.ok(result);
     }
 }
 
