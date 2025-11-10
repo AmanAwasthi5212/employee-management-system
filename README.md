@@ -9,4 +9,5 @@ A simple Spring Boot application that manages employees using RESTful APIs.
 - Postgres SQL
 - Maven
 - IntelliJ IDEA
+- Lombok
 
