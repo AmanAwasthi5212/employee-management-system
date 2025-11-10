@@ -18,10 +18,10 @@ public class EmployeeService {
     }
 
     public String addEmployee(Employee emp) {
-        boolean exists = empRepository.existsByIdAndName(emp.getId(),emp.getName());
-                empRepository.findAll().stream()
+        boolean exists = empRepository.findAll().stream()
                 .anyMatch(e -> e.getId() == emp.getId() &&
-                        e.getName().equals(emp.getName()));
+                        e.getFirstName().equals(emp.getFirstName()) &&
+                        e.getLastName().equals(emp.getLastName()));
         if (!exists) {
             empRepository.save(emp);
             return "User added successfully";
@@ -38,7 +38,8 @@ public class EmployeeService {
 
     public String updateEmployee(Employee emp, long id){
         return empRepository.findById(id).map(existingEmp -> {
-            if(emp.getName() != null) existingEmp.setName(emp.getName());
+            if(emp.getFirstName() != null) existingEmp.setFirstName(emp.getFirstName());
+            if(emp.getLastName() != null) existingEmp.setLastName(emp.getLastName());
             if(emp.getDepartment() != null) existingEmp.setDepartment(emp.getDepartment());
             if(emp.getSalary() != 0) existingEmp.setSalary(emp.getSalary());
             empRepository.save(existingEmp);
