@@ -1,35 +1,37 @@
 package com.first.Controller;
 
+
 import com.first.DTO.updateEmployeeDTO;
 import com.first.Model.Employee;
 import com.first.Service.EmployeeService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RequestMapping("/home")
+@RequiredArgsConstructor
 @RestController
 public class EmployeeController {
 
-    @Autowired
-    private EmployeeService employeeService;
+    private final EmployeeService employeeService;
 
     @GetMapping("/getUser")
-    public List<Employee> getEmployee(){
-        return employeeService.getEmployee();
+    public ResponseEntity<List<Employee>> getEmployee() {
+        return ResponseEntity.ok(employeeService.getEmployee());
     }
 
     @PostMapping("/addUser")
-    public String addEmployee(@Valid @RequestBody Employee employee){
-        return employeeService.addEmployee(employee);
+    public ResponseEntity<String> addEmployee(@Valid @RequestBody Employee employee){
+        return ResponseEntity.ok(employeeService.addEmployee(employee));
     }
 
     @DeleteMapping("/deleteUser")
-    public String deleteEmployee(@RequestBody Employee employee){
-        return employeeService.deleteEmployee(employee);
+    public ResponseEntity<String> deleteEmployee(@RequestBody Employee employee){
+        String result =  employeeService.deleteEmployee(employee);
+        return ResponseEntity.ok(result);
     }
 
     @PutMapping("/updateUser/{id}")

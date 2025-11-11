@@ -1,28 +1,25 @@
 package com.first.Service;
 
-//import com.first.Model.DummyEmployeeData;
 import com.first.DTO.updateEmployeeDTO;
 import com.first.Model.Employee;
 import com.first.Repository.EmployeeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class EmployeeService {
-    @Autowired
-    private EmployeeRepository empRepository;
+
+    private final EmployeeRepository empRepository;
 
     public List<Employee> getEmployee() {
         return empRepository.findAll();
     }
 
     public String addEmployee(Employee emp) {
-        boolean exists = empRepository.findAll().stream()
-                .anyMatch(e -> e.getId() == emp.getId() &&
-                        e.getFirstName().equals(emp.getFirstName()) &&
-                        e.getLastName().equals(emp.getLastName()));
+        boolean exists = empRepository.existsByFirstNameIgnoreCaseAndLastNameIgnoreCase
+                (emp.getFirstName(), emp.getLastName());
         if (!exists) {
             empRepository.save(emp);
             return "User added successfully";
