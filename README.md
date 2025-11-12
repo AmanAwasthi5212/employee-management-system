@@ -10,4 +10,5 @@ A simple Spring Boot application that manages employees using RESTful APIs.
 - Maven
 - IntelliJ IDEA
 - Lombok
+- Swagger
 
