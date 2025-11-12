@@ -22,16 +22,16 @@ public class EmployeeService {
                 (emp.getFirstName(), emp.getLastName());
         if (!exists) {
             empRepository.save(emp);
-            return "User added successfully";
-        } else return "user already exist";
+            return "Employee added successfully";
+        } else return "Employee already exist";
     }
 
     public String deleteEmployee(Employee emp){
         boolean exists = empRepository.existsById(emp.getId());
         if (exists) {
             empRepository.delete(emp);
-            return "User deleted successfully";
-        } else return "User does not exist";
+            return "Employee deleted successfully";
+        } else return "Employee does not exist";
     }
 
     public String updateEmployee(updateEmployeeDTO emp, long id){
@@ -41,17 +41,8 @@ public class EmployeeService {
             if(emp.getDepartment() != null) existingEmp.setDepartment(emp.getDepartment());
             if(emp.getSalary() != 0) existingEmp.setSalary(emp.getSalary());
             empRepository.save(existingEmp);
-            return "User updated successfully";
-        }).orElse("User does not exist");
+            return "Employee updated successfully";
+        }).orElse("Employee does not exist");
 
-//          Optional<Employee> existingEmp = empRepository.findById(id);
-//            if(existingEmp.isPresent()){
-//                Employee updatedEmp = existingEmp.get();
-//                if(emp.getName() != null) updatedEmp.setName(emp.getName());
-//                if(emp.getDepartment() != null) updatedEmp.setDepartment(emp.getDepartment());
-//                if(emp.getSalary() != 0) updatedEmp.setSalary(emp.getSalary());
-//                empRepository.save(updatedEmp);
-//                return "User updated successfully";
-//            } else return "User does not exist";
     }
 }

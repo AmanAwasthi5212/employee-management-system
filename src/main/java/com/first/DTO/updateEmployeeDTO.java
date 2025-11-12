@@ -1,19 +1,20 @@
 package com.first.DTO;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 public class updateEmployeeDTO {
 
+    @Schema(description = "First name of the employee", example = "John")
     private String firstName;
+    @Schema(example="Doe")
     private String lastName;
+    @Schema(example = "Engineering")
     private String department;
+    @Schema(example = "75000")
     private double salary;
 
 }
